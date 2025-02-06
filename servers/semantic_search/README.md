@@ -17,13 +17,38 @@ This MCP server provides semantic search functionality specifically designed to 
 1. Make sure you have Python 3.11+ installed
 2. Install the required packages:
 ```bash
-pip install mcp uv
+python -m venv .venv && .venv/bin/pip install -e .
 ```
 
-## Running the Server
+Then configure the server in your `cline_mcp_settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "semantic_search": {
+      "command": "/path_to/servers/semantic_search/.venv/bin/python",
+      "args": [
+        "/path_to/servers/semantic_search/src/main.py"
+      ],
+      "env": {
+        "QDRANT_URL": "",
+        "QDRANT_COLLECTION_NAME": "",
+        "QDRANT_API_KEY": "",
+        "OPENAI_API_KEY": "",
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+}
+```
+
+## Development
 
 0. Export the required environment variables:
 ```bash
+export QDRANT_URL="your-qdrant-url"
+export QDRANT_COLLECTION_NAME="your-qdrant-collection"
+export QDRANT_API_KEY="your-qdrant-api-key"
 export OPENAI_API_KEY="your-openai-api-key"
 ```
 
@@ -88,36 +113,15 @@ The server can be configured through environment variables:
 
 - `QDRANT_URL`: URL of your Qdrant instance (default: "http://localhost:6333")
 - `QDRANT_API_KEY`: API key for Qdrant authentication (optional)
-- `COLLECTION_NAME`: Name of the Qdrant collection to search (default: "default")
+- `QDRANT_COLLECTION_NAME`: Name of the Qdrant collection to search (default: "neuroconv")
 - `MODEL`: LLM model to use (default: "openai/o3-mini")
 - `TIMEOUT`: Search timeout in seconds (default: 60.0)
 - `LIMIT`: Maximum number of results to return (default: 10)
-
-## MCP Configuration
-
-To use this server with an MCP client, add the following configuration:
-
-```json
-{
-    "mcpServers": {
-        "neuroconv-search": {
-            "command": "python",
-            "args": ["/path/to/semantic_search_server/src/main.py"],
-            "env": {
-                "QDRANT_URL": "your-qdrant-url",
-                "QDRANT_API_KEY": "your-api-key",
-                "COLLECTION_NAME": "neuroconv-docs"
-            }
-        }
-    }
-}
-```
 
 ## Example Queries
 
 Here are some example queries you can try:
 
-1. Basic usage:
 ```json
 {
     "query": "What file formats does NeurConv support?",
@@ -125,18 +129,9 @@ Here are some example queries you can try:
 }
 ```
 
-2. Specific conversion:
 ```json
 {
     "query": "How do I convert Spike2 files to NWB?",
     "context": "I have experimental data recorded in Spike2"
-}
-```
-
-3. Best practices:
-```json
-{
-    "query": "What are the recommended practices for organizing my NWB files?",
-    "context": "I'm setting up a new data management system"
 }
 ```

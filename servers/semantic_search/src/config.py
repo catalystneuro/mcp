@@ -1,3 +1,4 @@
+import os
 from typing import Optional, List
 from dataclasses import dataclass
 
@@ -7,9 +8,9 @@ class SearchConfig:
     """Configuration for semantic search settings."""
 
     # Required settings
-    qdrant_url: str = "http://localhost:6333"
-    collection_name: str = "neuroconv"
-    qdrant_api_key: Optional[str] = None
+    qdrant_url: str = os.getenv("QDRANT_URL", "http://localhost:6333")
+    collection_name: str = os.getenv("QDRANT_COLLECTION_NAME", "neuroconv")
+    qdrant_api_key: Optional[str] = os.getenv("QDRANT_API_KEY", None)
 
     # Optional settings with defaults
     timeout: float = 60.0

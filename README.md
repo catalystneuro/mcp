@@ -10,7 +10,34 @@ CatalystNeuro maintained Model Context Protocol (MCP) servers.
 
 ## Usage with cline
 
-add instructions here
+To install a server:
+
+```bash
+cd servers/<server_name>
+python -m venv .venv && .venv/bin/pip install -e .
+```
+
+Then configure the server in your `cline_mcp_settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "<server_name": {
+      "command": "/path_to/servers/<server_name>/.venv/bin/python",
+      "args": [
+        "/path_to/servers/<server_name>/src/main.py"
+      ],
+      "env": {
+        "ENV_VAR_0": "VALUE0",
+        "ENV_VAR_1": "VALUE1",
+      },
+      "disabled": false,
+      "autoApprove": []
+    }
+}
+```
+
+Each server has its own configuration, so you need to check the server's documentation for the required environment variables.
 
 
 ## Development

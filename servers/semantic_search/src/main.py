@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import logging
 import asyncio
 from time import sleep
 from mcp.server.fastmcp import FastMCP
@@ -6,6 +7,10 @@ from mcp.server.fastmcp import FastMCP
 from search import search
 from config import config
 
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 mcp = FastMCP(
   "semantic-search-server",
@@ -56,3 +61,13 @@ async def search_about_neuroconv(query: str, context: str) -> str:
         model=config.model,
     )
     return str(result)
+
+
+if __name__ == "__main__":
+    logger.info("Starting the server")
+    try:
+        mcp.run()
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")
+    logger.info("Exiting the server")
+

@@ -38,11 +38,15 @@ def return_string(query: str, context: str) -> str:
 @mcp.tool()
 async def search_about_neuroconv(query: str, context: str) -> str:
     """
-    Search to learn about NeuroConv.
+    Use this tool to ask questions and learn about NeuroConv.
+    Formulate a concise search query and provide the relevant context.
+    Example:
+    query = "Convert spiking data from Blackrock systems to NWB."
+    context = "User wants to convert its recorded data to the NWB format, using NeuroConv."
 
     Args:
-      query: The search query text.
-      context: The relevant context for the query.
+      query: A concise search query, containig the keywords of interest.
+      context: A short but relevant context for the query.
 
     Returns:
       The string representation of the search result.

@@ -42,6 +42,8 @@ Then configure the server in your `cline_mcp_settings.json`:
 }
 ```
 
+Note: On OSX, this file can generally be found at: `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
+
 ## Development
 
 0. Export the required environment variables:

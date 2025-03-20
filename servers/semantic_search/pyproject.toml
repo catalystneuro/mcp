@@ -7,7 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "mcp==1.2.0",
     "qdrant-client==1.12.2",
-    "litellm==1.59.8",
+    "litellm==1.61.15",
     "instructor==1.7.2",
     "pydantic",
 ]
